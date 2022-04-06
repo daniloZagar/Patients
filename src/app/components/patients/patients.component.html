@@ -1,48 +1,35 @@
-<div class="flex h-screen justify-center items-center">
-  <div class="w-[900px]">
-    <h1 class="text-3xl pl-3">Patients</h1>
-    <div class="flex gap-12 py-5 mb-5 px-3 border-b-2 border-gray-300 py-2">
-      <button class="text-xl">Inactive</button
-      ><button class="text-xl">Randomized</button
-      ><button class="text-xl">All</button>
-    </div>
-    <div class="border-2 border-gray-300">
-      <div class="px-3 py-2 border-b-2 border-gray-300">
-        <p>Patient Details</p>
+<div class="border-2 border-gray-300">
+  <div class="px-3 py-2 border-b-2 border-gray-300">
+    <p>Patient Details</p>
+  </div>
+  <div class="flex flex-col" *ngFor="let patient of patients; let i = index">
+    <div class="border-b-2 flex justify-between w-full">
+      <div class="px-3 py-5">
+        <app-patient
+          class=""
+          [patientId]="patient.patientId"
+          [firstName]="patient.account.firstName"
+          [lastName]="patient.account.lastName"
+          [phone]="patient.account.phone"
+          [email]="patient.account.email"
+          [age]="patient.age"
+          [sex]="patient.sex"
+          [city]="patient.location.city"
+          [status]="patient.status"
+        ></app-patient>
       </div>
-      <div
-        class="flex flex-col"
-        *ngFor="let patient of patients; let i = index"
-      >
-        <div class="border-b-2 flex justify-between w-full">
-          <div class="px-3 py-5">
-            <app-patient
-              class=""
-              [patientId]="patient.patientId"
-              [firstName]="patient.account.firstName"
-              [lastName]="patient.account.lastName"
-              [phone]="patient.account.phone"
-              [email]="patient.account.email"
-              [age]="patient.age"
-              [sex]="patient.sex"
-              [city]="patient.location.city"
-              [status]="patient.status"
-            ></app-patient>
-          </div>
-          <div class="flex justify-center items-center border-l-2 border-gray-300">
-            <div class="flex flex-col px-3">
-              <button
-                class="text-base bg-transparent border-solid border-2 border-gray-300 px-5 py-1 rounded-full my-1"
-              >
-                Randomized
-              </button>
-              <button
-                class="text-base bg-transparent border-solid border-2 border-gray-300 px-5 py-1 rounded-full"
-              >
-                Inactive
-              </button>
-            </div>
-          </div>
+      <div class="flex justify-center items-center border-l-2 border-gray-300">
+        <div class="flex flex-col px-3">
+          <button
+            class="text-base bg-transparent border-solid border-2 border-gray-300 px-5 py-1 rounded-full my-1"
+          >
+            Randomized
+          </button>
+          <button
+            class="text-base bg-transparent border-solid border-2 border-gray-300 px-5 py-1 rounded-full"
+          >
+            Inactive
+          </button>
         </div>
       </div>
     </div>

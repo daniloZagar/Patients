@@ -6,9 +6,12 @@ import { AppComponent } from './app.component';
 import { PatientComponent } from './components/patients/patient/patient.component';
 import { PatientsComponent } from './components/patients/patients.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RandomComponent } from './components/random/random.component';
+import { InactiveComponent } from './components/inactive/inactive.component';
+import { AllComponent } from './components/all/all.component';
 
 @NgModule({
-  declarations: [AppComponent, PatientsComponent, PatientComponent],
+  declarations: [AppComponent, PatientsComponent, PatientComponent, RandomComponent, InactiveComponent, AllComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

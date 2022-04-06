@@ -1,1 +1,13 @@
-<app-patients></app-patients>
+<div class="flex h-screen justify-center items-center">
+  <div class="w-[900px]">
+    <h1 class="text-3xl pl-3">Patients</h1>
+    <div class="flex gap-12 py-5 mb-5 px-3 border-b-2 border-gray-300">
+      <button class="text-xl" (click)="inactivePatients()">Inactive</button
+      ><button class="text-xl" (click)="randomizedPatients()">Randomized</button
+      ><button class="text-xl" (click)="allPatients()">All</button>
+    </div>
+    <app-all *ngIf="allClicked"></app-all>
+    <app-random *ngIf="randomizedClicked"></app-random>
+    <app-inactive *ngIf="inactiveClicked"></app-inactive>
+  </div>
+</div>
