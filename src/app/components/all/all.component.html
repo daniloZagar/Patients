@@ -1,1 +1,6 @@
-<app-patients [patients]="allPatients"></app-patients>
+<app-patients
+  [patients]="allPatients"
+  
+  (pat)="onPatAdded($event)"
+></app-patients>
+{{ patient }}

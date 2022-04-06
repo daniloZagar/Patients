@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PatientsService } from 'src/app/services/patients.service';
 import { IPatients } from 'src/app/interfaces/patients.interface';
 
@@ -10,5 +10,11 @@ import { IPatients } from 'src/app/interfaces/patients.interface';
 export class PatientsComponent implements OnInit {
   constructor() {}
   @Input() patients: IPatients[] = [];
+  @Output() pat = new EventEmitter<IPatients>();
+  randomized(id: number) {
+    let patient = this.patients.find((pat) => pat.patientId === id);
+    this.pat.emit(patient);
+  }
+  inactive(id: number) {}
   ngOnInit(): void {}
 }
