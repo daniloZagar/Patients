@@ -18,7 +18,7 @@ export class InactiveComponent implements OnInit {
       if (this.patientService.inactivePatients.length > 0) {
         this.inactivePatients = [
           ...patient,
-          ...this.patientService.randomPatients,
+          ...this.patientService.inactivePatients,
         ];
       } else {
         this.inactivePatients = [...patient];

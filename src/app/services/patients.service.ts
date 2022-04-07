@@ -9,6 +9,7 @@ export class PatientsService {
   baseUrl = 'http://localhost:3000/api';
   randomPatients = [];
   inactivePatients = [];
+  allPatients = [];
   getPatients() {
     return this.http.get<IPatients[]>(`/api/patients`);
   }
@@ -17,5 +18,8 @@ export class PatientsService {
   }
   passInactivePatient(patient: IPatients) {
     this.inactivePatients.push(patient);
+  }
+  passAllPatients(allPatients) {
+    this.allPatients = allPatients;
   }
 }
