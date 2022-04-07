@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { IPatients } from 'src/app/interfaces/patients.interface';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PatientsService } from 'src/app/services/patients.service';
+import { IPatients } from 'src/app/interfaces/patients.interface';
 
 @Component({
   selector: 'app-all',
@@ -8,23 +8,34 @@ import { PatientsService } from 'src/app/services/patients.service';
   styleUrls: ['./all.component.scss'],
 })
 export class AllComponent implements OnInit {
-  allPatients: IPatients[] = [];
-  newRandomAllPatients: IPatients[] = [];
-  patient: IPatients;
-  emitRandom = new EventEmitter<IPatients>();
   constructor(private patientService: PatientsService) {}
-  onPatAdded(e: IPatients) {
-    this.patient = e;
-    this.newRandomAllPatients = this.allPatients.filter(
-      (allP) => allP.patientId !== e.patientId
-    );
-    this.patientService.passPatient(this.patient);
-    this.allPatients = [...this.newRandomAllPatients];
+  patients: IPatients[] = [];
+  globalStatus: string;
+  patientClicked: object;
+  randomized(id: number) {
+    let patient = this.patients.find((pat) => pat.patientId === id);
+    this.globalStatus = 'randomize';
+    patient.status = this.globalStatus;
+    let newPatients = this.patients.map((pt) => {
+      if (patient.patientId === pt.patientId) {
+        pt.status = patient.status;
+      }
+      return pt;
+    });
+    console.log(newPatients);
+
+    this.patients = [...newPatients];
+    this.patientService.passRandomPatient(patient);
+  }
+  inactive(id: number) {
+    let patient = this.patients.find((pat) => pat.patientId === id);
+    this.globalStatus = 'inactive';
+    patient.status = this.globalStatus;
+    this.patientService.passInactivePatient(patient);
   }
   ngOnInit(): void {
     this.patientService.getPatients().subscribe((data) => {
-      console.log(data);
-      this.allPatients = data;
+      this.patients = data;
     });
   }
 }

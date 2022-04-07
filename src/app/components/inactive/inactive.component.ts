@@ -13,13 +13,16 @@ export class InactiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.patientService.getPatients().subscribe((data) => {
-      console.log(data);
-      data.filter((dt) => {
-        if (dt.status === 'inactive') {
-          this.inactivePatients.push(dt);
-        }
-      });
+      let patient = data.filter((d) => d.status === 'inactive');
+
+      if (this.patientService.inactivePatients.length > 0) {
+        this.inactivePatients = [
+          ...patient,
+          ...this.patientService.randomPatients,
+        ];
+      } else {
+        this.inactivePatients = [...patient];
+      }
     });
-    console.log(this.inactivePatients);
   }
 }

@@ -10,4 +10,5 @@ export interface IPatients {
   location: { locationId: number; zip: string; city: string };
   patientId: number;
   status: string;
+  sent: boolean;
 }

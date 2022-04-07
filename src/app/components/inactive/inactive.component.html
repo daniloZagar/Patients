@@ -1,1 +1,30 @@
-<app-patients [patients]="inactivePatients"></app-patients>
+<div
+  class="flex flex-col"
+  *ngFor="let patient of inactivePatients; let i = index"
+>
+  <div class="border-b-2 flex justify-between w-full">
+    <div class="px-3 py-5">
+      <app-patient
+        class=""
+        [patientId]="patient.patientId"
+        [firstName]="patient.account.firstName"
+        [lastName]="patient.account.lastName"
+        [phone]="patient.account.phone"
+        [email]="patient.account.email"
+        [age]="patient.age"
+        [sex]="patient.sex"
+        [city]="patient.location.city"
+        [status]="patient.status"
+      ></app-patient>
+    </div>
+    <div class="flex justify-center items-center border-l-2 border-gray-300">
+      <div class="flex flex-col px-3">
+        <button
+          class="text-base bg-transparent border-solid border-2 border-gray-300 px-5 py-1 rounded-full my-1"
+        >
+          Return To All
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

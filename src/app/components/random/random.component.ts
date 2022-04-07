@@ -9,27 +9,21 @@ import { PatientsService } from 'src/app/services/patients.service';
 })
 export class RandomComponent implements OnInit {
   randomPatients: IPatients[] = [];
-  addedRandomPatient: IPatients[] = [];
-  patient: IPatients;
   constructor(private patientService: PatientsService) {}
-  onPatAdded(e: IPatients) {
-    console.log(e);
-    this.patient = e;
-  }
+
   ngOnInit(): void {
     this.patientService.getPatients().subscribe((data) => {
-      console.log(data);
-      data.filter((dt) => {
-        if (dt.status === 'randomized') {
-          this.randomPatients.push(dt);
-          if (this.patientService.patients.length !== 0) {
-            this.randomPatients = [
-              ...this.randomPatients,
-              ...this.patientService.patients,
-            ];
-          }
-        }
-      });
+      let patient = data.filter((d) => d.status === 'randomized');
+
+      if (this.patientService.randomPatients.length > 0) {
+        this.randomPatients = [
+          ...patient,
+          ...this.patientService.randomPatients,
+        ];
+        console.log(this.randomPatients);
+      } else {
+        this.randomPatients = [...patient];
+      }
     });
   }
 }
